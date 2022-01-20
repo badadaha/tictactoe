@@ -1,3 +1,49 @@
 body {
     text-align: center;
 }
+
+hr {
+    width: 100%;
+}
+
+.game-grid {
+    max-width: 500px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #DDD;
+    padding: 10px;
+    aspect-ratio: 1 / 1;
+}
+
+.game-grid-item {
+    background-color: #EEE;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 35px;
+    text-align: center;
+}
+
+.overlay{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #FFF;
+    vertical-align: middle;
+}
+
+.game-grid-item:hover .overlay{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.overlay-x{
+    color: #F00;
+    font-size: 50px;
+    text-align: center;
+}
+/*
+.game-grid-item:hover{
+    background-color: #FFF;
+    cursor: pointer;
+}*/
