@@ -1,22 +1,53 @@
-function selection(id, isMarked)
-{
-    alert("Clicked " + id);
+class Player {
+    symbol = null;
+
+    constructor(){
+        this.symbol = 'X';
+    }
+
+    clicked(id){
+        alert('clicked ' + id);
+        parent = document.getElementById(id);
+        parent.children[0].style.opacity = 1;
+    }
 }
 
 class Game {
-    user = null;
-    user2 = null;
+    player1 = null;
+    grid = [];
 
     constructor(){
-        this.user = 'user1';
-        this.user2 = 'user2';
+        this.player1 = new Player();
+        for (let i=1; i<=9; i++){
+            this.grid[i] = [];
+            this.grid[i]["isMarked"] = 0;
+            this.grid[i]["owner"] = null;
+        }
     }
 
-    printUser(){
-        alert(this.user);
-        alert(this.user2);
+    clicked(stringId){
+        let id = parseInt(stringId);
+        this.grid[id]['isMarked'] = 1;
+        this.grid[id]['owner'] = this.player1;
+        alert(this.grid[id]['isMarked'] + ' ' + this.grid[id]['owner']);
     }
+
 }
 
 const game = new Game();
 game.printUser();
+
+function selection(id) {
+    game.clicked(id);
+    game.player1.clicked(id);
+}
+
+function testGrid(){
+    let test = '';
+    for(let i=1; i<=9; i++){
+        test += '(' + i + ', ';
+        test += game.grid[i]['isMarked'].toString();
+        test += '), ';
+    }
+    alert(test);
+}
