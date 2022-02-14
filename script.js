@@ -6,7 +6,6 @@ class Player {
     }
 
     clicked(id){
-        alert('clicked ' + id);
         parent = document.getElementById(id);
         parent.children[0].style.opacity = 1;
     }
@@ -29,13 +28,11 @@ class Game {
         let id = parseInt(stringId);
         this.grid[id]['isMarked'] = 1;
         this.grid[id]['owner'] = this.player1;
-        alert(this.grid[id]['isMarked'] + ' ' + this.grid[id]['owner']);
     }
 
 }
 
 const game = new Game();
-game.printUser();
 
 function selection(id) {
     game.clicked(id);

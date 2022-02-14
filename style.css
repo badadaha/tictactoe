@@ -29,7 +29,9 @@ hr {
     opacity: 0;
     transition: .5s ease;
     background-color: #FFF;
-    vertical-align: middle;
+    vertical-align: baseline;
+    display: flex;
+    align-items: center;
 }
 
 .game-grid-item:hover .overlay{
@@ -38,8 +40,9 @@ hr {
 }
 
 .overlay-x{
+    width: inherit;
     color: #F00;
-    font-size: 50px;
+    font-size: 100px;
     text-align: center;
 }
 /*
