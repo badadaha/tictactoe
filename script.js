@@ -21,6 +21,14 @@ class Game {
         this.checkDiagonals();
     }
 
+    boardIsFull(){
+        for (let i=1; i<=9; i++){
+            if(this.grid[i] == 0)
+                return false;
+        }
+        return true;
+    }
+
     checkColumns(){
         if((this.grid[1] == 1)
         && (this.grid[4] == 1)
@@ -43,13 +51,13 @@ class Game {
         if((this.grid[1] == 2)
         && (this.grid[4] == 2)
         && (this.grid[7] == 2)){
-            this.win();
+            this.loss();
         } else if (
             (this.grid[2] == 2)
             && (this.grid[5] == 2)
             && (this.grid[8] == 2)
         ){
-            this.win();
+            this.loss();
         } else if (
             (this.grid[3] == 2)
             && (this.grid[6] == 2)
@@ -155,22 +163,25 @@ class AI {
 
     clicked(id){
         let parent = document.getElementById(id);
+        parent.setAttribute('onClick', null);
         parent.children[0].children[0].innerHTML = this.symbol;
         parent.children[0].style.opacity = 1;
         parent.children[0].children[0].style.color = '#00F';
+        if(this.game.boardIsFull()){
+            alert('No Winner!');
+            this.game.reset();
+        }
     }
 
     decide(){
         let options = [];
         for(let i=1; i<=9; i++){
             if(this.game.grid[i] == 0)
-                options[i] = i;
+                options.push(i);
         }
-        alert(options);
         let decision = options[Math.floor(Math.random()*options.length)];
-        alert(decision);
-        this.game.clicked(decision, 2);
         this.clicked(decision);
+        this.game.clicked(decision, 2);
     }
 }
 
@@ -186,8 +197,14 @@ class Player {
 
     clicked(id){
         let parent = document.getElementById(id);
+        parent.setAttribute('onClick', null);
         parent.children[0].style.opacity = 1;
-        this.ai.decide();
+        if(this.game.boardIsFull()){
+            alert('No Winner!');
+            this.game.reset();
+        } else {
+            this.ai.decide();
+        }
     }
 }
 
